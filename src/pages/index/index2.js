@@ -1,1 +1,1 @@
-console.log('hello index2')
+console.log('hello xxx')
