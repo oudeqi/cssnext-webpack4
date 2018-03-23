@@ -2,20 +2,22 @@ import './index.css'
 import jpg from '@/assets/img/1.jpg'
 import png from '@/assets/img/2.png'
 import data from './data.json'
+const $ = require('jquery')
 
-import { cube } from './math.js';
+console.log('process.env.NODE_ENV::', process.env.NODE_ENV)
 
-console.log(cube(5))
 
-import './index2.js'
+$('#btn').bind('click', function() {
+	console.log('动态导入')
+	import(/* webpackChunkName: "math2" */ './math.js').then(({cube}) => {
+		console.log('hello import--------', cube(55))
+	}).catch(error => 'An error occurred while loading the component');
+})
 
-console.log(jpg)
-console.log(png)
 
-console.log(data)
 
-if (module.hot) {
-   module.hot.accept('./index2.js', function() {
-     console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
-   })
- }
+// if (module.hot) {
+//    module.hot.accept('./index2.js', function() {
+//      console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+//    })
+//  }

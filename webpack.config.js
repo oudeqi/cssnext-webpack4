@@ -6,9 +6,9 @@ module.exports = function(env, argv) {
 	console.log('------------------------')
 	console.log(process.env.NODE_ENV)// undefined
 	return {
-		devtool: 'eval-source-map',// 发环境的最佳品质的 source map
+		// devtool: 'eval-source-map',// 发环境的最佳品质的 source map
 		//uglifyjs-webpack-plugin 时，你必须提供 sourceMap：true 选项来启用 source map 支持。
-	  // devtool: 'source-map',
+	  devtool: 'source-map',
 	  // 生产环境中，source map 作为一个单独的文件生成。
 	  // 它为 bundle 添加了一个引用注释，以便开发工具知道在哪里可以找到它。
 	  // 应该将服务器配置为，不允许普通用户访问 source map 文件
@@ -20,7 +20,6 @@ module.exports = function(env, argv) {
 	    path: path.resolve(__dirname, 'dist'),
 	    filename: 'js/[name].bundle.js',
 	    chunkFilename: 'js/[name].bundle.js',//ExtractTextWebpackPlugin[contenthash]
-	    pathinfo: !env.production,// 不应该用于生产环境(production)
 	    sourceMapFilename: '[file].map',
 	    publicPath: '/'
 	  },
@@ -67,9 +66,8 @@ module.exports = function(env, argv) {
         }]
 	  },
 	  plugins: [
-	  	// HotModuleReplacementPlugin
 	   // new webpack.optimize.UglifyJsPlugin(),
-	   	//new CleanWebpackPlugin(['dist']),//打包时使用
+	   	new CleanWebpackPlugin(['dist']),//打包时使用
 	   	
 	    new HtmlWebpackPlugin({
 	    	template: './src/pages/index/index.html',
