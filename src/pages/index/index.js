@@ -11,7 +11,9 @@ $('#btn').bind('click', function() {
 	console.log('动态导入')
 	import(/* webpackChunkName: "math2" */ './math.js').then(({cube}) => {
 		console.log('hello import--------', cube(55))
-	}).catch(error => 'An error occurred while loading the component');
+	}).catch(error => {
+		console.log('An error occurred while loading the component')
+	});
 })
 
 

@@ -10,8 +10,8 @@ module.exports = merge(common, {
 	devtool: 'source-map',
 	output: {
 		path: path.resolve(__dirname, '..', 'dist'),
-		filename: 'js/[name].[chunkhash].js',
-		chunkFilename: 'js/[name].[chunkhash].js',
+		filename: 'js/[name].[chunkhash:8].js',
+		chunkFilename: 'js/[name].[chunkhash:8].js',
 		publicPath: './'
 	},
 	module: {
@@ -30,7 +30,7 @@ module.exports = merge(common, {
 						loader: 'url-loader',
 						options: {
 							publicPath: '../',
-							name: 'img/[name].[ext]',
+							name: 'img/[name].[hash:8].[ext]',
 							limit: 1024 * 5,
 							fallback:'file-loader'
 						}
@@ -41,7 +41,7 @@ module.exports = merge(common, {
 				test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
 				loader: 'file-loader',
 				options: {
-					name: 'font/[name].[ext]',
+					name: 'font/[name].[hash:8].[ext]',
 					publicPath: '../',
 					limit: 1024 * 10,
 				}

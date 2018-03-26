@@ -18,13 +18,14 @@ module.exports = {
 	},
 	module: {
 		noParse: /jquery|lodash/,
-		// rules: [
-		// 	{
-		// 		test: /\.js$/,
-		// 		include: path.resolve(__dirname, '..', 'src'),
-		// 		loader: 'babel-loader'
-		// 	}	
-		// ]
+		rules: [
+			{
+				test: /(\.jsx|\.js)$/,
+				include: path.resolve(__dirname, '..', 'src'),
+				exclude: /(node_modules|bower_components)/,
+				loader: 'babel-loader'
+			}
+		]
 	},
 	plugins: [
 		new webpack.ProvidePlugin({
