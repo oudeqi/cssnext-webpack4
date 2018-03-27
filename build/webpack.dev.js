@@ -15,7 +15,33 @@ module.exports = merge(common, {
 		rules: [
 			{
 				test: /\.css$/,
-				use: ['style-loader','css-loader']
+				use: [
+					{
+						loader: 'style-loader',
+						options: { sourceMap: true }
+					},
+				    {
+				    	loader: 'css-loader',
+				    	options: {
+				    		sourceMap: true,
+				    		modules: false,
+				    		importLoaders: 1
+				    	}
+					},
+				    {
+				    	loader: 'postcss-loader', 
+				    	options: {
+				    		sourceMap: true,
+				    		config: {
+								ctx: {
+									cssnext: {},
+									cssnano: {},
+									autoprefixer: {}
+								}
+							}
+				    	}
+				    }
+				]
 			},
 			{
 				test: /\.(png|jpe?g|gif|svg)(\?\S*)?$/,
@@ -23,7 +49,7 @@ module.exports = merge(common, {
 					{
 						loader: 'url-loader',
 						options: {
-							publicPath: '../',
+							// publicPath: '/',
 							name: 'img/[name].[ext]',
 							limit: 1024 * 5,
 							fallback:'file-loader'

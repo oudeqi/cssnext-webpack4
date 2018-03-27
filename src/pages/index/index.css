@@ -1,3 +1,6 @@
+
+@import "../../assets/css/common.css";
+
 @font-face {
    font-family: 'MyFont';
    src:url('../../assets/fonts/Calibre-Regular.ttf') format('truetype');
@@ -32,7 +35,24 @@
 	font-size: 50px;
 }
 
+img {
+	max-width: 150px;
+}
 
-.cssnext {
+:root {
+  --mainColor: red;
+}
+/* zxczxczxc */
+.txxx {
 	color: red;
+}
+.cssnext {
+	font-size: 20px;
+	color: var(--mainColor);
+	width: 100px;
+	height: 100px;
+	border: 1px solid #ccc;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

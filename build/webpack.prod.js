@@ -1,9 +1,12 @@
+const glob = require('glob');
 const path = require('path');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+const purifyCssPlugin = require('purifycss-webpack');
 const webpack = require('webpack');
 
 module.exports = merge(common, {
@@ -18,10 +21,7 @@ module.exports = merge(common, {
 		rules: [
 			{
 				test: /\.css$/,
-				use: ExtractTextPlugin.extract({
-					fallback: "style-loader",
-					use: "css-loader"
-				})
+				use: [MiniCssExtractPlugin.loader, 'css-loader?', 'postcss-loader']
 			},
 			{
 				test: /\.(png|jpe?g|gif|svg)(\?\S*)?$/,
@@ -29,12 +29,35 @@ module.exports = merge(common, {
 					{
 						loader: 'url-loader',
 						options: {
-							publicPath: '../',
+							// publicPath: '/',
 							name: 'img/[name].[hash:8].[ext]',
 							limit: 1024 * 5,
 							fallback:'file-loader'
 						}
-					}
+					},
+					{
+		                loader: 'image-webpack-loader',
+		                options: {
+		                    bypassOnDebug: true,
+		                    mozjpeg: {
+		                        progressive: true,
+		                        quality: 65
+		                    },
+		                    optipng: {
+		                        enabled: false,
+		                    },
+		                    pngquant: {
+		                        quality: '65-90',
+		                        speed: 4
+		                    },
+		                    gifsicle: {
+		                        interlaced: false,
+		                    },
+		                    webp: {
+		                        quality: 75
+		                    }
+		                }
+		            }
 				]
 			},
 			{
@@ -52,10 +75,14 @@ module.exports = merge(common, {
 		new CleanWebpackPlugin(['dist'], {
             root: path.resolve(__dirname, '..')
         }),
-        new ExtractTextPlugin({
-            filename: 'css/[name].[contenthash:8].css',
+        new MiniCssExtractPlugin({
+            filename: 'css/[name].[hash:8].css',
             allChunks: false
         }),
+        new purifyCssPlugin({
+        	minimize: true,
+	        paths:glob.sync(path.resolve(__dirname, '..', 'src/**/*.html'))
+	    }),
 		new webpack.DefinePlugin({
             'process.env': {
                 'NODE_ENV': JSON.stringify('production')

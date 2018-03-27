@@ -1,3 +1,4 @@
+import "bootstrap/dist/css/bootstrap.css";
 import './index.css'
 import jpg from '@/assets/img/1.jpg'
 import png from '@/assets/img/2.png'

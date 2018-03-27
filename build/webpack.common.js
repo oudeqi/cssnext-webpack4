@@ -24,6 +24,21 @@ module.exports = {
 				include: path.resolve(__dirname, '..', 'src'),
 				exclude: /(node_modules|bower_components)/,
 				loader: 'babel-loader'
+			},
+			{
+				test: /\.html$/,
+				use: [
+					{
+                        loader: "html-loader",
+                        options: {
+                            attrs: [':data-src'],
+                            interpolate: true,
+                            minimize: false,
+                            removeComments: false,
+                            collapseWhitespace: false,
+                        }
+                    }
+				]
 			}
 		]
 	},
