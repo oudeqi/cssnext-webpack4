@@ -81,6 +81,9 @@ module.exports = merge(common, {
         }),
         new purifyCssPlugin({
         	minimize: true,
+        	purifyOptions: {
+				whitelist: ['*tooltip*']
+			},
 	        paths:glob.sync(path.resolve(__dirname, '..', 'src/**/*.html'))
 	    }),
 		new webpack.DefinePlugin({
