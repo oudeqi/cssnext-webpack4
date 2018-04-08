@@ -2,35 +2,35 @@
 @import "../../assets/css/common.css";
 
 @font-face {
-   font-family: 'MyFont';
+   font-family: 'Calibre';
    src:url('../../assets/fonts/Calibre-Regular.ttf') format('truetype');
    font-weight: 400;
 }
 @font-face {
-   font-family: 'MyFont';
+   font-family: 'Calibre';
    src: url('../../assets/fonts/Calibre-Medium.ttf') format('truetype');
    font-weight: 700;
 }
 @font-face {
-   font-family: 'MyFont';
+   font-family: 'Calibre';
    src: url('../../assets/fonts/Calibre-Semibold.ttf') format('truetype');
    font-weight: 900;
 }
 .test1 {
 	color: red;
-	font-family: 'MyFont';
+	font-family: 'Calibre';
 	font-weight: 400;
 	font-size: 50px;
 }
 .test2 {
 	color: red;
-	font-family: 'MyFont';
+	font-family: 'Calibre';
 	font-weight: 700;
 	font-size: 50px;
 }
 .test3 {
 	color: green;
-	font-family: 'MyFont';
+	font-family: "Calibre";
 	font-weight: 900;
 	font-size: 50px;
 }
