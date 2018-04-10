@@ -21,7 +21,7 @@ module.exports = merge(common, {
 		rules: [
 			{
 				test: /\.css$/,
-				use: [MiniCssExtractPlugin.loader, 'css-loader?', 'postcss-loader']
+				use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
 			},
 			{
 				test: /\.(png|jpe?g|gif|svg)(\?\S*)?$/,

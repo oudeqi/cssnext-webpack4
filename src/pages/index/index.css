@@ -1,19 +1,19 @@
 
-@import "../../assets/css/common.css";
+/*@import "../../styles/common.css";*/
 
 @font-face {
    font-family: 'Calibre';
-   src:url('../../assets/fonts/Calibre-Regular.ttf') format('truetype');
+   src:url('../../fonts/Calibre-Regular.ttf') format('truetype');
    font-weight: 400;
 }
 @font-face {
    font-family: 'Calibre';
-   src: url('../../assets/fonts/Calibre-Medium.ttf') format('truetype');
+   src: url('../../fonts/Calibre-Medium.ttf') format('truetype');
    font-weight: 700;
 }
 @font-face {
    font-family: 'Calibre';
-   src: url('../../assets/fonts/Calibre-Semibold.ttf') format('truetype');
+   src: url('../../fonts/Calibre-Semibold.ttf') format('truetype');
    font-weight: 900;
 }
 .test1 {
@@ -34,20 +34,26 @@
 	font-weight: 900;
 	font-size: 50px;
 }
-
-img {
-	max-width: 150px;
+html {
+	font-size: responsive;
+	lower-font-range: 768px;
+	upper-font-range: 992px;
+	min-font-size: 16px;
+	max-font-size: 20px;
 }
-
+img {
+	max-width: 300px;
+}
 :root {
   --mainColor: red;
+  --fontSize: 16px;
 }
 /* zxczxczxc */
 .txxx {
 	color: red;
 }
 .cssnext {
-	font-size: 20px;
+	font-size: calc(16px * 2);
 	color: var(--mainColor);
 	width: 100px;
 	height: 100px;
@@ -55,4 +61,18 @@ img {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+@media only screen and (min-width: 415px) {
+
+    .pace {
+        animation: pace-anim 5s;
+    }
+
+    @keyframes pace-anim {
+        100% {
+            opacity: 0;
+        }
+    }
+
 }

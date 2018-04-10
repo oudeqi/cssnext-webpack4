@@ -1,8 +1,8 @@
 import "bootstrap/dist/css/bootstrap.css";
-import './index.css'
-import jpg from '@/assets/img/1.jpg'
-import png from '@/assets/img/2.png'
-import data from './data.json'
+import '@/pages/index/index.css'
+import jpg from '@/images/1.jpg'
+import png from '@/images/2.png'
+import data from '@/pages/index/data.json'
 const $ = require('jquery')
 
 console.log('process.env.NODE_ENV::', process.env.NODE_ENV)
@@ -10,7 +10,7 @@ console.log('process.env.NODE_ENV::', process.env.NODE_ENV)
 
 $('#btn').bind('click', function() {
 	console.log('动态导入')
-	import(/* webpackChunkName: "math2" */ './math.js').then(({cube}) => {
+	import(/* webpackChunkName: "math2" */ '@/pages/index/math.js').then(({cube}) => {
 		console.log('hello import--------', cube(55))
 	}).catch(error => {
 		console.log('An error occurred while loading the component')
@@ -24,3 +24,19 @@ $('#btn').bind('click', function() {
 //      console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
 //    })
 //  }
+
+function timeout(val) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+    	resolve(val)
+    }, 1000);
+  });
+}
+
+async function asyncPrint() {
+  for(let i=0; i<10; i++){
+  	await timeout(i).then(res => {console.log(res)})
+  }
+}
+
+asyncPrint()
