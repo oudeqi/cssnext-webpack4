@@ -78,7 +78,7 @@ module.exports = merge(common, {
         })
 	],
 	devServer: {
-		contentBase: false,
+		contentBase: path.resolve(__dirname, 'dist'),
 		port: 9000,
 		clientLogLevel: "info",
 		host: "0.0.0.0",
