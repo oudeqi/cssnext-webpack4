@@ -76,7 +76,7 @@ module.exports = merge(common, {
             root: path.resolve(__dirname, '..')
         }),
         new MiniCssExtractPlugin({
-            filename: 'css/[name].[hash:8].css',
+            filename: 'css/[name].[chunkhash:8].css',
             allChunks: false
         }),
         new purifyCssPlugin({

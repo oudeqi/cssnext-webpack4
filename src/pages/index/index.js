@@ -18,25 +18,25 @@ $('#btn').bind('click', function() {
 })
 
 
-
 // if (module.hot) {
 //    module.hot.accept('./index2.js', function() {
-//      console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+//      console.log('zxc');
 //    })
 //  }
 
-function timeout(val) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-    	resolve(val)
-    }, 1000);
-  });
-}
+// function timeout(val) {
+//   return new Promise((resolve) => {
+//     setTimeout(() => { resolve(val) }, 1000);
+//   });
+// }
 
-async function asyncPrint() {
-  for(let i=0; i<10; i++){
-  	await timeout(i).then(res => {console.log(res)})
-  }
-}
+// async function asyncPrint() {
+//   for(let i=0; i<10; i++){
+//   	await timeout(i).then(res => {console.log(res)})
+//   }
+// }
 
-asyncPrint()
+// asyncPrint()
+
+console.log('zxczxczxczxc')
+console.log('vv')

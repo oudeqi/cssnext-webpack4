@@ -44,17 +44,38 @@ html {
 img {
 	max-width: 300px;
 }
-:root {
-  --mainColor: red;
-  --fontSize: 16px;
+
+
+@svg 1px-border { 
+	height: 2px; 
+	@rect { 
+		fill: red; 
+		width: 100%; 
+		height: 50%; 
+	} 
 }
-/* zxczxczxc */
-.txxx {
-	color: red;
+@svg square { 
+	@rect {
+		stroke:red;
+		stroke-width:1px;
+		fill: #fff; 
+		width: 100%; 
+		height: 100%; 
+	} 
 }
+
+.write-svg {
+	height: 50px;
+	margin-top: 20px;
+	/*border: 1px solid transparent; 
+	border-image: svg(1px-border) 2 2 stretch; */
+	background: white svg(square);
+}
+
+
+
 .cssnext {
 	font-size: calc(16px * 2);
-	color: var(--mainColor);
 	width: 100px;
 	height: 100px;
 	border: 1px solid #ccc;
@@ -63,16 +84,242 @@ img {
 	align-items: center;
 }
 
-@media only screen and (min-width: 415px) {
+/* custom properties & var() */
+:root {
+  --mainColor: purple;
+}
+a {
+  color: var(--mainColor);
+}
 
-    .pace {
-        animation: pace-anim 5s;
-    }
+/* custom properties set & @apply */
+:root {
+  --danger-theme: {
+    color: white;
+    background-color: red;
+    height: 100px;
+    width: 100px;
+  };
+}
+.danger {
+  @apply --danger-theme;
+}
 
-    @keyframes pace-anim {
-        100% {
-            opacity: 0;
-        }
-    }
+/* reduced calc() */
+:root {
+  --fontSize: 1rem;
+}
+h1 {
+  font-size: calc(var(--fontSize) * 2);
+}
 
+/* custom media queries */
+@custom-media --small-viewport (max-width: 768px);
+.small-show {
+	width: 200px;
+	height: 200px;
+	border: 1px solid #ddd;
+	transition: all 1s ease;
+}
+@media (--small-viewport) {
+  .small-show {
+  	width: 100px;
+	height: 100px;
+  }
+}
+
+/* media queries ranges */
+.ranges {
+	width: 100px;
+	height: 100px;
+	border: 1px solid #ddd;
+	transition: all 1s ease;
+}
+@media (width >= 768px) and (width <= 992px) {
+  .ranges {
+	width: 200px;
+	height: 200px;
+  }
+}
+@custom-media --only-md-screen (width >= 992px) and (width <= 1200px);
+@media (--only-md-screen) {
+  .ranges {
+	width: 300px;
+	height: 300px;
+  }
+}
+
+/* custom selectors */
+@custom-selector :--button button, .button;
+@custom-selector :--enter :hover, :focus;
+
+:--button {
+  background: #eee;
+  color: #666;
+  border: 1px solid #666;
+  transition: all .5s ease;
+}
+:--button:--enter {
+  background: red;
+  color: #fff;
+  border: 1px solid red;
+}
+
+/* nesting */
+.link {
+  & span {
+    color: white;
+  }
+  @nest span & {
+    color: blue;
+  }
+  @media (min-width: 768px) {
+    color: pink;
+  }
+}
+
+/* image-set() function */
+.image-set {
+	width: 200px;
+	height: 200px;
+	border: 1px solid #ddd;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	background-image: image-set(url(../../images/2.png) 1x, 
+								url(../../images/1.jpg) 2x, 
+								url(../../images/2.png) 600dpi);
+}
+
+/*  color() function */
+.link2 {
+  background: color(red alpha(-10%));
+  font-size: 30px;
+}
+.link2:hover {
+	background: color(red blackness(80%));
+}
+
+/* hwb() function */
+/* hsl颜色，是CSS3才出现的颜色表现格式，
+因此IE9+浏览器才支持。
+和rgb分别表示red, green, blue一样，
+hsl颜色三个字母也有自己的含义，其中，
+h表示Hue, 是色调的意思，取值懂0~360，大致按照数值红橙黄绿青蓝紫变化的节奏；
+s表示Saturation, 饱和度的意思，0~100%表示，值越大，饱和度越高，颜色越亮，
+l表示Lightness，亮度的意思，也是0~100%表示，越亮。100%就是白色，50%则是正常亮度，
+0%的亮度就是黑色。*/
+.hwb {
+  font-size: 30px;
+  background: hwb(300, 0%, 0%, 1);
+}
+.hwb:hover {
+  background: hwb(300, 0%, 10%, 1);
+}
+
+/* gray() function */
+.gray1 {
+  font-size: 30px;
+  background: gray(85);
+}
+.gray2 {
+  font-size: 30px;
+  background: gray(0%, 50%);
+}
+
+/* #rrggbbaa colors */
+.rrggbbaa {
+  font-size: 30px;
+	background: #f005;
+}
+
+/* rebeccapurple color */
+.rebeccapurple {
+  font-size: 30px;
+  background: rebeccapurple;
+}
+
+/*rgba function (rgb fallback)*/
+.rgb_fallback {
+  font-size: 30px;
+  background: rgba(153, 221, 153, 0.8);
+}
+
+/* font-variant property */
+.font-variant-caps {
+  font-size: 30px;
+  font-variant-caps: small-caps;
+}
+.font-variant-numeric {
+  font-size: 30px;
+  font-variant-numeric: lining-nums;
+}
+
+/* filter property */
+.filter {
+	width: 200px;
+	height: 200px;
+	border: 1px solid #ddd;
+	background-image: url(../../images/1.jpg);
+	background-size: contain;
+	background-repeat: no-repeat;
+	filter: blur(2px);
+}
+
+/* initial value */
+.initial {
+	all: initial;
+	border:1px solid red;
+}
+
+/* rem unit (px fallback) */
+.rem-fallback {
+	font-size: 1.5rem;
+}
+
+/* :any-link pseudo-class */
+.xxx :any-link {
+  background-color: yellow;
+}
+
+/* :matches pseudo-class */
+p:matches(:first-child, :last-child, .special) {
+  color: red;
+}
+
+/* :not pseudo-class */
+.not span:not(:first-child, .special) {
+  color: red;
+}
+
+/* :: pseudo syntax (: fallback) */
+.pseudo::before {
+  content: "pseudo";
+  color: red;
+}
+
+/* overflow-wrap property (word-wrap fallback) */
+.overflow-wrap {
+	overflow-wrap: break-word;
+}
+
+/* attribute case insensitive */
+[frame="hsides" i] {
+  border-style: solid none;
+}
+
+/* rgb() function (functional-notation) */
+.rgb {
+  background-color: rgb(100 222.2 100.9 / 30%);
+}
+
+/* hsl() function (functional-notation) */
+.hsl {
+	color: hsl(90deg 90% 70%);
+	background-color: hsl(300grad 25% 15% / 70%);
+}
+
+/* system-ui font-family */
+.system-ui {
+	font-family: system-ui;
 }
