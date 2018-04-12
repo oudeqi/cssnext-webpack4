@@ -20,10 +20,10 @@ module.exports = {
 		noParse: /jquery|lodash/,
 		rules: [
 			{
-				test: /(\.jsx|\.js)$/,
+				test: /\.(js|jsx)$/,
+				use: 'babel-loader',
 				include: path.resolve(__dirname, '..', 'src'),
-				exclude: /(node_modules|bower_components)/,
-				loader: 'babel-loader'
+				exclude: /(node_modules|bower_components)/
 			},
 			{
 				test: /\.html$/,
